@@ -12,10 +12,11 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route />
-        <Route />
-        <Route />
-        <Route />
+        <Route path="/" element={<Home />} />
+        <Route path="/bookmarks" element={<Bookmarks />} />
+        <Route path="/reminders" element={<Reminders />} />
+        <Route path="/assignments" element={<Assignments />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </>
   );
