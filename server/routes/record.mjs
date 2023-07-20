@@ -4,58 +4,79 @@ import { ObjectId } from "mongodb";
 
 const router = express.Router();
 
-// This section will help you get a list of all the records.
-router.get("/", async (req, res) => {
-  let collection = await db.collection("records");
+// GET request to get a list of bookmarks from the bookmarks collection of the databse
+router.get("/bookmarks", async (req, res) => {
+  let collection = await db.collection("bookmarks");
   let results = await collection.find({}).toArray();
   res.send(results).status(200);
 });
 
-// This section will help you get a single record by id
-router.get("/:id", async (req, res) => {
-  let collection = await db.collection("records");
-  let query = { _id: new ObjectId(req.params.id) };
-  let result = await collection.findOne(query);
-
-  if (!result) res.send("Not found").status(404);
-  else res.send(result).status(200);
-});
-
-// This section will help you create a new record.
-router.post("/", async (req, res) => {
-  let newDocument = {
+// POST request to add a new bookmark to the bookmarks collection of the database
+router.post("/bookmarks", async (req, res) => {
+  let newBookmark = {
     name: req.body.name,
-    position: req.body.position,
-    level: req.body.level,
+    url: req.body.url,
+    color: req.body.color,
   };
-  let collection = await db.collection("records");
-  let result = await collection.insertOne(newDocument);
+
+  let collection = await db.collection("bookmarks");
+  let result = await collection.insertOne(newBookmark);
   res.send(result).status(204);
 });
 
-// This section will help you update a record by id.
-router.patch("/:id", async (req, res) => {
+// DELETE request to remove a specific bookmark from the bookmarks collection of the database by ID
+router.delete("/bookmarks/:id", async (req, res) => {
   const query = { _id: new ObjectId(req.params.id) };
-  const updates = {
-    $set: {
-      name: req.body.name,
-      position: req.body.position,
-      level: req.body.level,
-    },
-  };
 
-  let collection = await db.collection("records");
-  let result = await collection.updateOne(query, updates);
+  const collection = db.collection("bookmarks");
+  let result = await collection.deleteOne(query);
 
   res.send(result).status(200);
 });
 
-// This section will help you delete a record
-router.delete("/:id", async (req, res) => {
+// GET request to get all reminders from the reminders collection of the database
+router.get("/tasks", async (req, res) => {
+  let collection = await db.collection("todo");
+  let results = await collection.find({}).toArray();
+  res.send(results).status(200);
+});
+
+// POST request to add a new reminder to the reminders collection of the database
+router.post("/tasks", async (req, res) => {
+  let newReminder = {
+    task: req.body.task,
+    note: req.body.note,
+    complete: req.body.complete,
+  };
+
+  let collection = await db.collection("todo");
+  let result = await collection.insertOne(newReminder);
+  res.send(result).status(204);
+});
+
+// DELETE request to delete a specific reminder from the reminders collection of the database
+router.delete("/tasks/:id", async (req, res) => {
   const query = { _id: new ObjectId(req.params.id) };
 
-  const collection = db.collection("records");
+  const collection = db.collection("todo");
   let result = await collection.deleteOne(query);
+
+  res.send(result).status(200);
+});
+
+// PATCH request to update a specific reminder to change its completion status
+router.patch("/tasks/:id", async (req, res) => {
+  const query = { _id: new ObjectId(req.params.id) };
+  const updates = {
+    $set: {
+      task: req.body.task,
+      note: req.body.note,
+      complete: req.body.complete,
+    },
+  };
+
+  let collection = await db.collection("todo");
+  let result = await collection.updateOne(query, updates);
 
   res.send(result).status(200);
 });

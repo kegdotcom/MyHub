@@ -10,6 +10,6 @@ try {
   console.error(err);
 }
 
-let db = conn.db("testing");
+let db = await conn.db("MyHubTests");
 
 export default db;
