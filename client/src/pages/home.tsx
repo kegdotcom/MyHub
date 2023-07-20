@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Icon from "../components/Icon";
 import Viewpane from "../components/Viewpane";
+import Clock from "../components/Clock";
 
 export default function Home() {
   return (
     <Viewpane>
-      <h1>Hello</h1>
-      <p>
-        welcome home <Icon name="activity" />
-      </p>
+      <Clock />
+      <h6 className="text-center">Welcome to MyTime!</h6>
     </Viewpane>
   );
 }
