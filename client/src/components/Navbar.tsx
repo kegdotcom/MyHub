@@ -41,22 +41,27 @@ export default function Navbar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
+            <li className="nav-item px-2">
               <Link className="nav-link" to="/">
                 <Icon name="house" /> Home
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item px-2">
               <Link className="nav-link" to="/bookmarks">
                 <Icon name="bookmarks" /> Bookmarks
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item px-2">
               <Link className="nav-link" to="/reminders">
-                <Icon name="list-task" /> Reminders
+                <Icon name="clipboard2" /> Reminders
               </Link>
             </li>
-            <li className="nav-item dropdown">
+            <li className="nav-item px-2">
+              <Link className="nav-link" to="/assignments">
+                <Icon name="layers" /> Assignments
+              </Link>
+            </li>
+            <li className="nav-item dropdown px-2">
               <a
                 className="nav-link dropdown-toggle"
                 href="#"
@@ -78,10 +83,10 @@ export default function Navbar() {
                 <li>
                   <button
                     type="button"
-                    className="btn btn-secondary"
+                    className="btn w-100"
                     onClick={toggleTheme}
                   >
-                    <Icon name={theme === "dark" ? "moon" : "sun"} /> Toggle
+                    <Icon name={theme === "dark" ? "sun" : "moon"} /> Toggle
                     Theme
                   </button>
                 </li>

@@ -6,7 +6,7 @@ interface ViewpaneProps {
 
 function Viewpane({ children }: ViewpaneProps) {
   return (
-    <div className="container" style={{ height: "90vh" }}>
+    <div className="container" style={{ height: "90vh", padding: "2.5vh" }}>
       {children}
     </div>
   );
