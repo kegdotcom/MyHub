@@ -90,7 +90,7 @@ export default function TaskModal({ open, onAdd }: TModalProps) {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Note"
+                  placeholder="Note (Optional)"
                   aria-label="Task Note"
                   aria-describedby="note-field"
                   onChange={(e) => updateForm({ note: e.target.value })}

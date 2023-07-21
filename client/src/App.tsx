@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/bookmarks" element={<Bookmarks />} />
-        <Route path="/reminders" element={<Todo />} />
+        <Route path="/todo" element={<Todo />} />
         <Route path="/assignments" element={<Assignments />} />
         <Route path="/settings" element={<Settings />} />
       </Routes>

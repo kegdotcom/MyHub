@@ -19,10 +19,12 @@ export default function TaskItem({
   onUpdate,
 }: TaskProps) {
   return (
-    <tr className={complete === "complete" ? "table-success" : "table-danger"}>
+    <tr>
       <td>
         <button
-          className="btn"
+          className={
+            complete === "complete" ? "btn btn-success" : "btn btn-danger"
+          }
           onClick={async function updateTaskStatus() {
             const newCompletion =
               complete === "complete" ? "incomplete" : "complete";
@@ -46,12 +48,12 @@ export default function TaskItem({
           }}
         >
           <Icon
-            name={complete === "complete" ? "clipboard2-x" : "clipboard2-check"}
+            name={complete === "complete" ? "clipboard2-check" : "clipboard2-x"}
           />
         </button>
       </td>
-      <td>{task}</td>
-      <td>{note}</td>
+      <td className="text-capitalize">{task}</td>
+      <td className="text-capitalize">{note}</td>
       <td>
         <button
           className="btn btn-outline-danger"

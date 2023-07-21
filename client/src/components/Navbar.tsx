@@ -52,8 +52,8 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item px-2">
-              <Link className="nav-link" to="/reminders">
-                <Icon name="clipboard2" /> Reminders
+              <Link className="nav-link" to="/todo">
+                <Icon name="clipboard2" /> To-Do List
               </Link>
             </li>
             <li className="nav-item px-2">

@@ -74,14 +74,22 @@ export default function Todo() {
         </h1>
       </div>
       {modalOpen && <TaskModal open={setModalOpen} onAdd={handleUpdate} />}
-      <table className="table table-hover">
+      <table className="table table-hover table-striped">
         <thead>
-          <th scope="col">Complete</th>
-          <th scope="col">Task</th>
-          <th scope="col">Note</th>
-          <th scope="col">Delete</th>
+          <th scope="col" className="col-1">
+            Complete
+          </th>
+          <th scope="col" className="col-5">
+            Task
+          </th>
+          <th scope="col" className="col-3">
+            Note
+          </th>
+          <th scope="col" className="col-1">
+            Delete
+          </th>
         </thead>
-        <tbody>{taskList()}</tbody>
+        <tbody className="table-group-divider">{taskList()}</tbody>
       </table>
     </Viewpane>
   );
