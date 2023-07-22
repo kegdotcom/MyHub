@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Viewpane from "../components/Viewpane";
 import { ObjectId } from "mongodb";
-import TaskItem from "../components/TaskItem";
+import TaskItem from "../components/Task";
 import Icon from "../components/Icon";
-import TaskModal from "../components/CreateTaskModal";
+import { TaskModal } from "../components/Modals";
 
 export interface TaskStr {
   _id: ObjectId;

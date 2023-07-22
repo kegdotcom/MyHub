@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { TaskStr } from "../pages/todo";
+import React from "react";
 import { ObjectId } from "mongodb";
 import Icon from "./Icon";
 

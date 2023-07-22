@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Viewpane from "../components/Viewpane";
 import Bookmark from "../components/Bookmark";
 import Icon from "../components/Icon";
-import CreateBookmarkModal from "../components/CreateBookmarkModal";
+import { CreateBookmarkModal } from "../components/Modals";
 import { ObjectId } from "mongodb";
 
 interface BookmarkStr {
@@ -62,23 +62,21 @@ export default function Bookmarks() {
 
   return (
     <Viewpane>
-      <div>
-        <h1>
-          Bookmarks
-          <button
-            type="button"
-            className="btn btn-outline-secondary"
-            style={{ float: "right" }}
-            onClick={() => setModalOpen(!modalOpen)}
-          >
-            <Icon name="bookmark-plus" />
-          </button>
-        </h1>
-      </div>
+      <h1 style={{ marginBottom: "25px" }}>
+        Bookmarks
+        <button
+          type="button"
+          className="btn btn-outline-secondary"
+          style={{ float: "right" }}
+          onClick={() => setModalOpen(!modalOpen)}
+        >
+          <Icon name="bookmark-plus" />
+        </button>
+      </h1>
       {modalOpen && (
         <CreateBookmarkModal open={setModalOpen} onAdd={handleUpdate} />
       )}
-      <div className="row row-cols-1 row-cols-md-3 g-4">{bookmarkList()}</div>
+      <div className="row row-cols-1 row-cols-md-4 g-4">{bookmarkList()}</div>
     </Viewpane>
   );
 }
