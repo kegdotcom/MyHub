@@ -114,20 +114,23 @@ export default function Assignments() {
       </h1>
       <table className="table table-hover table-striped">
         <thead>
-          <th scope="col" className="col-1">
+          <th scope="col" className="col-1 text-center">
             Course
           </th>
-          <th scope="col" className="col-1">
+          <th scope="col" className="col-1 text-center">
             Type
           </th>
-          <th scope="col" className="col-4">
+          <th scope="col" className="col-4 text-center">
             Name
           </th>
-          <th scope="col" className="col-1">
+          <th scope="col" className="col-1 text-center">
             Points
           </th>
-          <th scope="col" className="col-3" colSpan={3}>
+          <th scope="col" className="col-2 text-center">
             Due Date
+          </th>
+          <th scope="col" className="col-1 text-center">
+            Due Time
           </th>
         </thead>
         <tbody className="table-group-divider">{assignmentList()}</tbody>

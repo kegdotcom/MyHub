@@ -53,16 +53,18 @@ export default function AssignmentItem({
 
   return (
     <tr>
-      <td className="text-capitalize col-1">{assignment.courseID}</td>
-      <td className="text-capitalize col-1">{assignment.type}</td>
+      <td className="text-capitalize col-1 text-center">
+        {assignment.courseID}
+      </td>
+      <td className="text-capitalize col-1 text-center">{assignment.type}</td>
       <td className="text-capitalize col-4">
         <a href={assignment.url} target="_blank">
           {(assignment.locked ? "[LOCKED]" : "") + assignment.name}
         </a>
       </td>
-      <td className="col-1">{assignment.points}</td>
-      <td className="col-2">{formatDate(assignment.dueDate)}</td>
-      <td className="col-1">{formatTime(assignment.dueDate)}</td>
+      <td className="col-1 text-center">{assignment.points}</td>
+      <td className="col-2 text-center">{formatDate(assignment.dueDate)}</td>
+      <td className="col-1 text-center">{formatTime(assignment.dueDate)}</td>
     </tr>
   );
 }
