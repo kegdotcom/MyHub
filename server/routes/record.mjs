@@ -1,7 +1,6 @@
 import express from "express";
 import db from "../db/conn.mjs";
 import { ObjectId } from "mongodb";
-
 const router = express.Router();
 
 // GET request to get a list of bookmarks from the bookmarks collection of the databse
@@ -79,6 +78,25 @@ router.patch("/tasks/:id", async (req, res) => {
   let result = await collection.updateOne(query, updates);
 
   res.send(result).status(200);
+});
+
+router.get("/todo", async (req, res) => {
+  const kegAuthToken = process.env.K_AUTH;
+  const joeAuthToken = process.env.J_AUTH;
+  const baseURL = process.env.CANVAS_BASE_URL;
+
+  try {
+    const response = await fetch(`https://${baseURL}/api/v1/users/self/todo`, {
+      headers: {
+        Authorization: `Bearer ${joeAuthToken}`,
+      },
+    });
+    const data = await response.json();
+    res.send(data).status(200);
+  } catch (err) {
+    console.error(err);
+    res.send(err).status(404);
+  }
 });
 
 export default router;

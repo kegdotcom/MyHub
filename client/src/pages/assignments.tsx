@@ -1,50 +1,100 @@
 import React, { useState, useEffect } from "react";
-import { ObjectId } from "mongodb";
 import Viewpane from "../components/Viewpane";
 import AssignmentItem from "../components/Assignment";
 import Icon from "../components/Icon";
-
-export interface AssignmentStr {
-  id: ObjectId;
-  name: string;
-  course: string;
-  link: string;
-  type: string;
-  points: number;
-  dueDate: string;
-}
+import FinalTaskObj, { TodoObj } from "../components/AssignmentTypes";
 
 export default function Assignments() {
-  const [assignments, setAssignments] = useState<AssignmentStr[]>([]);
+  const [assignments, setAssignments] = useState<FinalTaskObj[]>([]);
 
-  async function fetchAssignments() {
-    const response = await fetch("http://localhost:5050/record/assignments");
-
-    if (!response.ok) {
-      window.alert(`Error fetching assignments: ${response.statusText}`);
+  async function fetchTodoList() {
+    try {
+      const response = await fetch("http://localhost:5050/record/todo");
+      return response;
+    } catch (err) {
+      console.error(err);
       return;
     }
-
-    const data = await response.json();
-    return data;
   }
 
   useEffect(() => {
-    async function initialFetchAssignments() {
-      const data = await fetchAssignments();
-      setAssignments(data);
+    async function convertAssignments() {
+      const response = await fetchTodoList();
+      const data: TodoObj[] = await response?.json();
+      let finalAssignments: FinalTaskObj[] = [];
+      data.forEach((item) => {
+        if (item.hasOwnProperty("assignment") && item.assignment) {
+          const newAssignment: FinalTaskObj = {
+            classification: item.type,
+            type: "assignment",
+            name: item.assignment.name,
+            description: item.assignment.description,
+            dueDate: item.assignment.due_at,
+            points: item.assignment.points_possible,
+            url: item.assignment.html_url,
+            locked: item.assignment.locked_for_user,
+            courseID: item.course_id,
+          };
+          finalAssignments.push(newAssignment);
+        } else if (item.hasOwnProperty("quiz") && item.quiz) {
+          const newQuiz: FinalTaskObj = {
+            classification: item.type,
+            type: "quiz",
+            name: item.quiz.title,
+            description: item.quiz.description,
+            dueDate: item.quiz.due_at,
+            points: item.quiz.points_possible,
+            url: item.quiz.html_url,
+            locked: item.quiz.locked_for_user,
+            courseID: item.course_id,
+          };
+          finalAssignments.push(newQuiz);
+        }
+      });
+      setAssignments(finalAssignments);
     }
-    initialFetchAssignments();
+    convertAssignments();
   }, []);
 
   async function handleUpdate() {
-    const data = await fetchAssignments();
-    setAssignments(data);
+    const response = await fetchTodoList();
+    const data: TodoObj[] = await response?.json();
+    let finalAssignments: FinalTaskObj[] = [];
+    data.forEach((item) => {
+      if (item.hasOwnProperty("assignment") && item.assignment) {
+        const newAssignment: FinalTaskObj = {
+          classification: item.type,
+          type: "assignment",
+          name: item.assignment.name,
+          description: item.assignment.description,
+          dueDate: item.assignment.due_at,
+          points: item.assignment.points_possible,
+          url: item.assignment.html_url,
+          locked: item.assignment.locked_for_user,
+          courseID: item.course_id,
+        };
+        finalAssignments.push(newAssignment);
+      } else if (item.hasOwnProperty("quiz") && item.quiz) {
+        const newQuiz: FinalTaskObj = {
+          classification: item.type,
+          type: "quiz",
+          name: item.quiz.title,
+          description: item.quiz.description,
+          dueDate: item.quiz.due_at,
+          points: item.quiz.points_possible,
+          url: item.quiz.html_url,
+          locked: item.quiz.locked_for_user,
+          courseID: item.course_id,
+        };
+        finalAssignments.push(newQuiz);
+      }
+    });
+    setAssignments(finalAssignments);
   }
 
   function assignmentList() {
-    const assignmentItems = assignments.map((a) => {
-      return <AssignmentItem assignment={a} onUpdate={handleUpdate} />;
+    const assignmentItems = assignments.map((item) => {
+      return <AssignmentItem assignment={item} onUpdate={handleUpdate} />;
     });
     return assignmentItems;
   }
@@ -64,8 +114,11 @@ export default function Assignments() {
       </h1>
       <table className="table table-hover table-striped">
         <thead>
-          <th scope="col" className="col-2">
+          <th scope="col" className="col-1">
             Course
+          </th>
+          <th scope="col" className="col-1">
+            Type
           </th>
           <th scope="col" className="col-4">
             Name
@@ -73,11 +126,8 @@ export default function Assignments() {
           <th scope="col" className="col-1">
             Points
           </th>
-          <th scope="col" className="col-2">
+          <th scope="col" className="col-3" colSpan={3}>
             Due Date
-          </th>
-          <th scope="col" className="col-1">
-            Hide
           </th>
         </thead>
         <tbody className="table-group-divider">{assignmentList()}</tbody>
