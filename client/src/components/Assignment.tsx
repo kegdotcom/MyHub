@@ -56,7 +56,7 @@ export default function AssignmentItem({
       <td className="text-capitalize col-1">{assignment.courseID}</td>
       <td className="text-capitalize col-1">{assignment.type}</td>
       <td className="text-capitalize col-4">
-        <a href={assignment.url}>
+        <a href={assignment.url} target="_blank">
           {(assignment.locked ? "[LOCKED]" : "") + assignment.name}
         </a>
       </td>
