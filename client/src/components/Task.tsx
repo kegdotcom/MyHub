@@ -1,4 +1,3 @@
-import React from "react";
 import { ObjectId } from "mongodb";
 import Icon from "./Icon";
 

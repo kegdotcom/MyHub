@@ -1,4 +1,3 @@
-import React from "react";
 import Viewpane from "../components/Viewpane";
 
 export default function Settings() {

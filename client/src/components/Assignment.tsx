@@ -1,6 +1,3 @@
-import React, { useState } from "react";
-import { ObjectId } from "mongodb";
-import Icon from "./Icon";
 import FinalTaskObj from "./AssignmentTypes";
 
 interface AssignmentProps {

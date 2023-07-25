@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Viewpane from "../components/Viewpane";
 import Bookmark from "../components/Bookmark";
 import Icon from "../components/Icon";

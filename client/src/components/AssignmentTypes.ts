@@ -1,5 +1,3 @@
-import { NumberLiteralType } from "typescript";
-
 export interface TodoObj {
   type: string;
   assignment?: AssignmentObj;

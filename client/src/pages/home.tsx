@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-import Icon from "../components/Icon";
 import Viewpane from "../components/Viewpane";
 import Clock from "../components/Clock";
 
